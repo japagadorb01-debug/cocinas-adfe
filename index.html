@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las cocinas del Aula del Futuro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --primary: #c0392b; /* Rojo culinario de alta cocina */
+            --primary-light: #f9ebea;
+            --secondary: #2c3e50; /* Azul oscuro institucional */
+            --accent: #e67e22; /* Naranja para detalles de cocción */
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --text-muted: #666666;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* BARRA SUPERIOR DE LOGOS INTERCONECTADOS */
+        .brand-bar {
+            background-color: #ffffff;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .tag-taller {
+            background-color: var(--secondary);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .logos-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Integración limpia para logos con los nombres exactos suministrados */
+        .logos-container img {
+            height: 45px;
+            object-fit: contain;
+            filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.05));
+        }
+
+        .logo-divider {
+            width: 1px;
+            height: 30px;
+            background-color: #e0e0e0;
+        }
+
+        /* HERO CABECERA CULINARIA */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            color: white;
+            padding: 40px 5%;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid var(--primary);
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* CONTENEDOR PRINCIPAL RESPONSIVE GRID */
+        .main-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 992px) {
+            .main-container {
+                grid-template-columns: 2.2fr 1fr;
+            }
+        }
+
+        /* TARJETAS / CONTENEDORES */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .card-title i {
+            color: var(--primary);
+        }
+
+        /* RETO: EL MENÚ DEGUSTACIÓN */
+        .challenge-box {
+            background: linear-gradient(to right, var(--primary-light), #ffffff);
+            border-left: 5px solid var(--primary);
+        }
+
+        /* BOTONES DE DOCUMENTACIÓN / PLATOS */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 576px) {
+            .docs-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .btn-doc {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .btn-doc i {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .btn-doc:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.1);
+        }
+
+        /* REPARTO DE BRIGADA (ROLES) */
+        .roles-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 576px) {
+            .roles-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .role-item {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .role-item h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .role-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* CRONÓMETRO DE COCCIÓN */
+        .timer-box {
+            text-align: center;
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .timer-box .card-title {
+            color: white;
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .timer-box .card-title i {
+            color: var(--accent);
+        }
+
+        .timer-display {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-timer {
+            background-color: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-timer:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .btn-timer.active {
+            background-color: var(--primary);
+        }
+
+        /* QR ACCESO MÓVIL */
+        .qr-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #qrcode {
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* TIPS DE COCINADO / REALIZACIÓN */
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+
+        .tips-list li::before {
+            content: "\f0eb";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* RECURSOS COMPARTIDOS EXTRAS */
+        .extra-resources {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-extra {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .btn-extra i {
+            font-size: 1.2rem;
+        }
+
+        .btn-extra.drive i { color: #1ea362; }
+        .btn-extra.canva i { color: #00c4cc; }
+        .btn-extra.eval i { color: #4285f4; }
+
+        .btn-extra:hover {
+            background-color: #edf2f7;
+            transform: translateX(3px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="brand-bar">
+        <span class="tag-taller"><i class="fa-solid fa-headset"></i> Micro-Taller Videopodcast</span>
+        <div class="logos-container">
+            <img src="Logo AdFE.png" alt="Logo Aula del Futuro">
+            <div class="logo-divider"></div>
+            <img src="RADIOEDU logo trans.png" alt="Logo RadioEdu">
+        </div>
+    </div>
+
+    <header class="hero">
+        <h1>Las cocinas del Aula del Futuro</h1>
+        <p>"Tartar de Radio Escolar con Vídeo y Reducción de Ruido"</p>
+    </header>
+
+    <div class="main-container">
+        
+        <main>
+            <div class="card challenge-box">
+                <h3 class="card-title"><i class="fa-solid fa-utensils"></i> 🍳 El Reto: Emisión en Directo</h3>
+                <p>¡Bienvenidos a la cocina de producción de Dulce TV! Hoy convertiremos nuestra mesa de debate en un plató de televisión real. Un presentador entrevistará en riguroso directo a un Chef experto, preguntándole sobre las propiedades de su plato estrella: <strong>el videopodcast educativo</strong>. Selecciona tu rol en la brigada de cocina, abre tus recetas (documentación técnica) y sincroniza tu trabajo en OBS Studio para que el plato salga exquisito.</p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><i class="fa-solid fa-book-open"></i> 📜 Las Recetas del Plato (Guiones y Escaletas)</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Selecciona el material de apoyo técnico según el nivel de inspiración e improvisación de tu grupo:</p>
+                <div class="docs-grid">
+                    <a href="https://docs.google.com/document/d/1jmTpYpd29Wj-ojXmaN3LD3MxqKjDbttzmlifbGDbCIY/edit?tab=t.0#heading=h.bdypvjx32k3" target="_blank" class="btn-doc">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span>1. Escaleta Técnica</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1qFl0ANBvXCim00w7bYDsBIijXxHe-b5KnmbvBE_eegQ/edit?tab=t.d58i1eri4263#heading=h.bdypvjx32k3" target="_blank" class="btn-doc">
+                        <i class="fa-solid fa-mortar-pestle"></i>
+                        <span>2. Escaleta Enriquecida</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1O4aoWWp5hgs6vnj95g0z1f06FpiKjvpbYtcM1Zip_oI/edit?tab=t.36z8a341t870" target="_blank" class="btn-doc">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>3. Guion Cerrado</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><i class="fa-solid fa-users-gear"></i> 👥 Distribución de la Brigada de Cocina</h3>
+                <div class="roles-list">
+                    <div class="role-item">
+                        <h4><i class="fa-solid fa-sliders"></i> Realizador/a (1-2 Docentes)</h4>
+                        <p>Al mando del PC con OBS. Ejecuta la escaleta transicionando entre las 3 cámaras en el Modo Estudio y lanzando los faldones.</p>
+                    </div>
+                    <div class="role-item">
+                        <h4><i class="fa-solid fa-microphone-lines"></i> Presentador/a (1 Docente)</h4>
+                        <p>Abre el programa en plano medio, introduce la metáfora culinaria y conduce la entrevista interactuando con el invitado.</p>
+                    </div>
+                    <div class="role-item">
+                        <h4><i class="fa-solid fa-clipboard-list"></i> Regidor/a (1 Docente)</h4>
+                        <p>Controla el tiempo de cocción (20 min), da las entradas físicas en el plató y apoya la coordinación técnica.</p>
+                    </div>
+                    <div class="role-item">
+                        <h4><i class="fa-solid fa-user-tie"></i> Chef Invitado/a (1 Docente)</h4>
+                        <p>Experto en innovación. Expone los beneficios pedagógicos, lingüísticos y digitales del videopodcast en el aula.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <div class="card timer-box">
+                <h3 class="card-title"><i class="fa-solid fa-stopwatch"></i> Tiempo de Cocción</h3>
+                <div class="timer-display" id="clock">20:00</div>
+                <div class="timer-controls">
+                    <button class="btn-timer" id="btn-start"><i class="fa-solid fa-play"></i> Iniciar</button>
+                    <button class="btn-timer" id="btn-reset"><i class="fa-solid fa-rotate-left"></i> Reiniciar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><i class="fa-solid fa-folder-open"></i> Despensa de Recursos</h3>
+                <div class="extra-resources">
+                    <a href="https://drive.google.com/drive/folders/19aK6pjkOFU6mHH7ibsdrwJtskPyfAcHO?usp=sharing" target="_blank" class="btn-extra drive">
+                        <i class="fa-brands fa-google-drive"></i> Servidor Multimedia (Drive)
+                    </a>
+                    <a href="https://canva.link/t1uqvbbmzxzp58d" target="_blank" class="btn-extra canva">
+                        <i class="fa-solid fa-palette"></i> Faldones y Moscas (Canva)
+                    </a>
+                    <a href="https://docs.google.com/document/d/1EOVCx2juBdEDq8--7LNBebLL-6Ol1bAIDZmRHBdcrmA/edit?tab=t.0" target="_blank" class="btn-extra eval">
+                        <i class="fa-solid fa-chart-check"></i> Banco de Rúbricas AdF
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title"><i class="fa-solid fa-video"></i> Tips de Realización</h3>
+                <ul class="tips-list">
+                    <li><strong>Estructura de 3 cámaras:</strong> Plano General para situar la mesa, Plano Medio 1 para Presentador y Plano Medio 2 para Invitado.</li>
+                    <li><strong>Mise en place en OBS:</strong> Recuerda usar el Modo Estudio. Prepara la siguiente escena en *Previa* antes de enviarla a *Programa*.</li>
+                    <li><strong>Elements Gráficos:</strong> Lanza la mosca fija de "Dulce TV" y conmuta los faldones específicos cuando cambies de plano.</li>
+                </ul>
+            </div>
+
+            <div class="card qr-box">
+                <h3 class="card-title"><i class="fa-solid fa-mobile-screen-button"></i> Acceso Móvil</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Escanea este código QR para abrir este mantel digital en tu móvil y seguir el guion cómodamente.</p>
+                <div id="qrcode"></div>
+            </div>
+        </aside>
+
+    </div>
+
+    <script>
+        let timeLeft = 20 * 60; 
+        let timerInterval = null;
+        const clockDisplay = document.getElementById('clock');
+        const startBtn = document.getElementById('btn-start');
+        const resetBtn = document.getElementById('btn-reset');
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            clockDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (timerInterval === null) {
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar';
+                        startBtn.classList.remove('active');
+                        alert('¡Tiempo de cocción finalizado! Rotación de grupo.');
+                    }
+                }, 1000);
+                startBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Pausar';
+                startBtn.classList.add('active');
+            } else {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Continuar';
+                startBtn.classList.remove('active');
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 20 * 60;
+            updateDisplay();
+            startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar';
+            startBtn.classList.remove('active');
+        });
+
+        window.addEventListener('load', () => {
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 128,
+                height: 128,
+                colorDark : "#2c3e50",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+    </script>
+</body>
+</html>
