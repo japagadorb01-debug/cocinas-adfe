@@ -218,6 +218,84 @@
             color: var(--text-muted);
         }
 
+        /* RECETARIO DE OBS (desplegables) */
+        .manual {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            scroll-margin-top: 20px;
+        }
+
+        .manual summary {
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .manual summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .manual summary i {
+            color: var(--primary);
+        }
+
+        .manual summary::after {
+            content: "\f078";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-left: auto;
+            color: var(--primary);
+            transition: transform 0.2s;
+        }
+
+        .manual[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .manual-body {
+            padding: 0 16px 16px;
+            font-size: 0.9rem;
+        }
+
+        .manual-body .manual-intro {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .manual-body h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin: 14px 0 6px;
+        }
+
+        .manual-body ol,
+        .manual-body ul {
+            padding-left: 22px;
+        }
+
+        .manual-body li {
+            margin-bottom: 8px;
+        }
+
+        .manual-body .tip {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-top: 10px;
+        }
+
         .timer-box {
             text-align: center;
             background-color: var(--secondary);
@@ -333,6 +411,8 @@
         .btn-extra.drive i { color: #1ea362; }
         .btn-extra.canva i { color: #00c4cc; }
         .btn-extra.eval i { color: #4285f4; }
+        .btn-extra.obs i { color: var(--primary); }
+        .btn-extra.vdo i { color: var(--accent); }
 
         .btn-extra:hover {
             background-color: #edf2f7;
@@ -384,6 +464,65 @@
             </div>
 
             <div class="card">
+                <h3 class="card-title"><i class="fa-solid fa-kitchen-set"></i> 🍽️ El Recetario de OBS</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Dos mini manuales para dominar la cocina audiovisual. Pulsa para desplegar cada uno:</p>
+
+                <details class="manual" id="manual-obs">
+                    <summary><i class="fa-solid fa-tv"></i> Manual 1: OBS Studio en 4 pasos (Tu cocina audiovisual)</summary>
+                    <div class="manual-body">
+                        <p class="manual-intro">Piensa en OBS Studio como la cocina de un restaurante: preparas cada plano con calma antes de servirlo en directo.</p>
+                        <ol>
+                            <li><strong>Escenas (los platos del menú):</strong> son los distintos planos o pantallas de tu programa (ej. Bienvenida, Explicación con pantalla, Despedida). Están en el panel inferior izquierdo y cambias de una a otra con un clic.</li>
+                            <li><strong>Fuentes (los ingredientes):</strong> es todo lo que añades dentro de una escena: cámara, captura de pantalla, micrófono, imágenes o vídeos.
+                                <div class="tip"><strong>Regla de oro:</strong> el orden de la lista importa; lo que está arriba tapa a lo que está debajo.</div>
+                            </li>
+                            <li><strong>Monitores (Modo Estudio):</strong> pulsa el botón <strong>Modo Estudio</strong> (abajo a la derecha) para dividir la pantalla en dos:
+                                <ul>
+                                    <li><strong>Monitor izquierdo (Vista previa) = la cocina.</strong> Aquí preparas y encuadras la siguiente escena sin que el público lo vea.</li>
+                                    <li><strong>Monitor derecho (Programa) = la sala.</strong> Es lo que se está viendo en directo. Pulsa <strong>Transición</strong> en el centro para "servir el plato" de izquierda a derecha.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Streaming y grabación (¡a servir!):</strong>
+                                <ul>
+                                    <li><strong>Conectar:</strong> ve a <em>Ajustes &gt; Emisión</em>, elige tu plataforma (YouTube, Twitch...) y pega tu <em>Clave de retransmisión</em>.</li>
+                                    <li><strong>Emitir:</strong> en el panel inferior derecho, pulsa <strong>Iniciar transmisión</strong> para salir en vivo.</li>
+                                    <li><strong>Grabar:</strong> pulsa <strong>Iniciar grabación</strong> para guardar el programa como vídeo en tu ordenador.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details class="manual" id="manual-vdo">
+                    <summary><i class="fa-solid fa-mobile-screen"></i> Manual 2: Usa tu móvil o tablet como cámara en OBS (VDO.Ninja)</summary>
+                    <div class="manual-body">
+                        <p class="manual-intro">Convierte cualquier dispositivo móvil en una cámara inalámbrica, sin instalar aplicaciones ni usar cables.</p>
+
+                        <h5>Paso 1: Prepara el móvil o la tablet</h5>
+                        <ol>
+                            <li>Abre el navegador web (Chrome o Safari) y entra en <strong>vdo.ninja</strong>.</li>
+                            <li>Toca en <strong>Add your Camera to OBS</strong> (Añadir tu cámara a OBS).</li>
+                            <li>Concede permisos de cámara y micrófono, selecciona la cámara (frontal o trasera) y pulsa el botón verde <strong>START</strong>.</li>
+                            <li>Copia el <strong>enlace verde</strong> que aparece en la parte superior de la pantalla y envíatelo al ordenador (por correo, WhatsApp Web, Drive, etc.).</li>
+                        </ol>
+
+                        <h5>Paso 2: Conéctalo en OBS Studio</h5>
+                        <ol>
+                            <li>En tu ordenador, abre OBS y selecciona la <strong>Escena</strong> donde quieras ver el móvil.</li>
+                            <li>En el panel <strong>Fuentes</strong>, pulsa el icono <strong>+</strong> y elige <strong>Navegador</strong>.</li>
+                            <li>Ponle un nombre (ej. <em>Cámara Móvil</em>) y pulsa <strong>Aceptar</strong>.</li>
+                            <li>En el recuadro <strong>URL</strong>, borra lo que aparece y pega el enlace verde.</li>
+                            <li>Cambia el ancho y alto a <strong>1920 x 1080</strong> (calidad HD) y pulsa <strong>Aceptar</strong>.</li>
+                        </ol>
+
+                        <div class="tip">
+                            <strong>Importante:</strong> cada móvil o tablet genera su <strong>propio enlace</strong>. Si usas tres cámaras, necesitas tres enlaces y una fuente Navegador por cada una. Y para que la imagen vaya fluida, conecta todos los dispositivos a una buena red wifi.
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="card">
                 <h3 class="card-title"><i class="fa-solid fa-users-gear"></i> 👥 Distribución de la Brigada de Cocina</h3>
                 <div class="roles-list">
                     <div class="role-item">
@@ -427,6 +566,12 @@
                     </a>
                     <a href="https://docs.google.com/document/d/1EOVCx2juBdEDq8--7LNBebLL-6Ol1bAIDZmRHBdcrmA/edit?tab=t.0" target="_blank" class="btn-extra eval">
                         <i class="fa-solid fa-chart-check"></i> Banco de Rúbricas AdF
+                    </a>
+                    <a href="#manual-obs" class="btn-extra obs">
+                        <i class="fa-solid fa-tv"></i> Manual OBS Studio
+                    </a>
+                    <a href="#manual-vdo" class="btn-extra vdo">
+                        <i class="fa-solid fa-mobile-screen"></i> Manual VDO.Ninja
                     </a>
                 </div>
             </div>
@@ -493,6 +638,14 @@
             updateDisplay();
             startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar';
             startBtn.classList.remove('active');
+        });
+
+        // Los accesos directos de la Despensa abren el manual correspondiente
+        document.querySelectorAll('a[href^="#manual-"]').forEach(link => {
+            link.addEventListener('click', () => {
+                const manual = document.querySelector(link.getAttribute('href'));
+                if (manual) manual.open = true;
+            });
         });
 
         window.addEventListener('load', () => {
